@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-        <meta charset="utf-8">
+            <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>mle chang - Articles in the Programming category</title>
+        <title>mle chang</title>
 
 
         <!-- Bootstrap Core CSS -->
@@ -32,8 +32,24 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-		<meta property="og:locale" content="en">
+
+
+
+        <meta name="tags" contents="Virtual Machines" />
+        <meta name="tags" contents="Ubuntu" />
+        <meta name="tags" contents="Linux" />
+
+
+			<meta property="og:locale" content="en">
 		<meta property="og:site_name" content="mle chang">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="/setting-up-my-first-virtualbox.html">
+	<meta property="og:title" content="Setting up my first VirtualBox">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="/">
+	<meta property="article:published_time" content="2016-07-04 00:00:00-04:00">
 </head>
 
 <body>
@@ -64,12 +80,17 @@
     </nav>
 
     <!-- Page Header -->
-        <header class="intro-header" style="background-image: url('/theme/images/home-bg.jpg')">
+        <header class="intro-header" style="background-image: url('/theme/images/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>Articles in the Programming category</h1>
+                        <h1>Setting up my first VirtualBox</h1>
+                        <span class="meta">Posted by
+                                <a href="/author/mlechang.html">mlechang</a>
+                             on Mon 04 July 2016
+                        </span>
+                        
                     </div>
                 </div>
             </div>
@@ -80,41 +101,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-preview">
-            <a href="/setting-up-my-first-virtualbox.html" rel="bookmark" title="Permalink to Setting up my first VirtualBox">
-                <h2 class="post-title">
-                    Setting up my first VirtualBox
-                </h2>
-            </a>
-                <p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> is a free, open source solution for running multiple operating ...
-            <p class="post-meta">Posted by
-                    <a href="/author/mlechang.html">mlechang</a>
-                 on Mon 04 July 2016
-            </p>
-        </div>
-        <hr>
-        <div class="post-preview">
-            <a href="/setting-up-pelican-blog-github-pages.html" rel="bookmark" title="Permalink to Setting up your Pelican blog on GitHub Pages">
-                <h2 class="post-title">
-                    Setting up your Pelican blog on GitHub Pages
-                </h2>
-            </a>
-                <p>Step 1: Follow <a href="http://mathamy.com/migrating-to-github-pages-using-pelican.html">this tutorial</a></p>
-<p>Step 2: Set up your ...
-            <p class="post-meta">Posted by
-                    <a href="/author/mlechang.html">mlechang</a>
-                 on Sat 18 June 2016
-            </p>
-        </div>
-        <hr>
+    <!-- Post Content -->
+    <article>
+        <p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> is a free, open source solution for running multiple operating systems simultaneously, testing new applications, and just plain having fun. It's like having many computers on your computer. You can create multiple Virtual Machines (VMs) and designate how much hardware to allocate to these machines.</p>
+<p>After reading so much about Ubuntu this and Ubuntu that, I was excited to test it out in VirtualBox for the first time. For total noobs like me, if I can do it, you can do it, too.</p>
+<p>This post goes out to all the people who are sheepishly tired of asking Google "stupid" questions about VirtualBox.</p>
+<p><strong>Stupid question #1:</strong> How do I get VirtualBox to use the version of Ubuntu I want? </p>
+<p><strong>Answer:</strong> You download the ISO image file from <a href="http://www.ubuntu.com/download/desktop">here</a>. Then when you follow the instructions in the <a href="http://www.virtualbox.org/manual/ch01.html">VirtualBox manual</a> you will be able to select this file from a dropdown menu by clicking the folder icon and locating it on your local (host) machine (in my case, it was in my Downloads folder).</p>
+<p><strong>Stupid question #2:</strong> Once it starts up, should I click "Try Ubuntu" or "Install Ubuntu"? I thought I already installed Ubuntu, why is it asking me to install it again?</p>
+<p><strong>Answer:</strong> You haven't actually installed Ubuntu yet, silly! All you did was download the ISO image file. Open up your VM and click "Install Ubuntu"...it will ask you to select your keyboard type and time zone, and ask you to set up your user name and password. Don't worry, it's OK to "erase the disk and install Ubuntu" -- this will <strong>not</strong> erase your local computer's disk. It just means you'll have a fresh install of Ubuntu on your VirtualBox VM. A </p>
+<p><strong>Stupid question #3:</strong> OK, I've installed Ubuntu 16.04 final!y! How do I open up the Terminal? </p>
+<p><strong>Answer:</strong> Click on the upper left icon and type "Terminal" and click enter. Voila! A nice and shiny Terminal for your coding pleasure. Once the Terminal icon is on your menu bar (dock?), you can right click it to make sure it stays accessible in your "dock." </p>
+<p><strong>Stupid question #4:</strong> You mentioned right clicking in the last answer...how do I right click in Ubuntu?</p>
+<p><strong>Answer:</strong> The steps are <a href="https://help.ubuntu.com/16.04/ubuntu-help/a11y-right-click.html">here</a>. Navigate to system settings &gt; Universal Access &gt; Pointing and Clicking &gt; and activate "Simulated Secondary Click." To right click, you just hold down the click and wait for right click menu to pop up after a delay.</p>
+<p><strong>Stupid question #5:</strong> How do I paste in Ubuntu?</p>
+<p><strong>Answer:</strong> By now you've probably discovered that it's not Command + V. Try Control + Shift + V.</p>
+<p><strong>Stupid question #6:</strong> How do I move a file from my local (host) machine to my new virtual machine?</p>
+<p><strong>Answer:</strong> Make sure you install Guest Adidtions by going to Devices &gt; Install Guest Additions (should be the last item in the dropdown menu). Then reboot the VM, go to Devices (in the menu at the top), Drag and Drop, and select "bidirectional." You should now be able to drag a file from your host machine to your VM, and vice versa. If it still doesn't work, try rebooting the VM. </p>
+    </article>
 
-    <!-- Pager -->
-    <ul class="pager">
-        <li class="next">
-        </li>
-    </ul>
-    Page 1 / 1
     <hr>
+
             </div>
         </div>
     </div>
