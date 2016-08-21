@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-        <meta charset="utf-8">
+            <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>mle chang - Archives</title>
+        <title>mle chang</title>
 
 
         <!-- Bootstrap Core CSS -->
@@ -32,8 +32,23 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-		<meta property="og:locale" content="en">
+
+
+
+        <meta name="tags" contents="Jenkins" />
+        <meta name="tags" contents="MacOSX" />
+
+
+			<meta property="og:locale" content="en">
 		<meta property="og:site_name" content="mle chang">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="/intro-to-jenkins-on-mac.html">
+	<meta property="og:title" content="How to get Jenkins set up on Mac OSX">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="/">
+	<meta property="article:published_time" content="2016-08-21 00:00:00-04:00">
 </head>
 
 <body>
@@ -64,12 +79,17 @@
     </nav>
 
     <!-- Page Header -->
-        <header class="intro-header" style="background-image: url('/theme/images/home-bg.jpg')">
+        <header class="intro-header" style="background-image: url('/theme/images/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>Archives for mle chang</h1>
+                        <h1>How to get Jenkins set up on Mac OSX</h1>
+                        <span class="meta">Posted by
+                                <a href="/author/mlechang.html">mlechang</a>
+                             on Sun 21 August 2016
+                        </span>
+                        
                     </div>
                 </div>
             </div>
@@ -80,17 +100,49 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <dl>
-            <dt>Sun 21 August 2016</dt>
-            <dd><a href="/intro-to-jenkins-on-mac.html">How to get Jenkins set up on Mac OSX</a></dd>
-            <dt>Sun 24 July 2016</dt>
-            <dd><a href="/python-elasticsearch-intro.html">Intro to pyelasticsearch (Elasticsearch + Python)</a></dd>
-            <dt>Mon 04 July 2016</dt>
-            <dd><a href="/setting-up-my-first-virtualbox.html">Setting up my first VirtualBox</a></dd>
-            <dt>Sat 18 June 2016</dt>
-            <dd><a href="/setting-up-pelican-blog-github-pages.html">Setting up your Pelican blog on GitHub Pages</a></dd>
-        <hr>
-    </dl>
+    <!-- Post Content -->
+    <article>
+        <p>Is it just me, or is Jenkins the best name for a technology, ever? Sorry, Alexa and Siri. Clippy <em>maybe</em> comes in second. You want to order <strong>Jenkins</strong> around, not some robot with a creepy voice!</p>
+<p>I've always had a weird fascination with butlers (butlering?). I've even read two books about butlers (<em>The Remains of the Day</em> and <em>Wake up, Sir!</em>). But playing around with Jenkins is the ultimate way to acquire your own butler in real life...at least kinda.</p>
+<h2>Meet Jenkins</h2>
+<p>For those who don't know, Jenkins is a continuous integration solution that helps development teams automatically test and integrate new code into their existing code base. </p>
+<p>But Jenkins isn't an elitist—he doesn't just cater to gigantic technology teams. You can use Jenkins at home, like a personal butler who attends to your personal development needs. If you've got a Mac machine and a few minutes, I'll show you how to install and set up Jenkins on your local machine. </p>
+<p>Check if you have Java installed:
+<code>java -version</code> 
+If not, download that first.</p>
+<p>Next, download the latest stable version of Jenkins <a href="https://jenkins.io/">here</a>. Try going to <code>localhost:8080</code> in a web browser. If that doesn't work, start it up on the command line:</p>
+<div class="highlight"><pre><span></span># start the daemon
+sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist
+
+# stop the daemon
+sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+</pre></div>
+
+
+<p>Once you've started it up, navigate to <code>localhost:8080</code> in a web browser. You are now face to face with Jenkins.</p>
+<p>Let's ask Jenkins to execute a shell script on the 1st and 15th of every month. You can set up Jenkins to pull that off. In the side menu, click on "New Item" and give your job a name.</p>
+<p>Check the box to "build periodically". </p>
+<p>To make it run once a day on the 1st and 15th of every month:
+<code>H H 1,15 1-12 *</code></p>
+<p>Type out your shell script right in the text box under Build &gt; Execute shell.</p>
+<div class="highlight"><pre><span></span><span class="err">#</span><span class="x"> a ridiculous shell script </span>
+<span class="x">echo </span><span class="p">$</span><span class="nv">BUILD_NUMBER</span><span class="x"></span>
+<span class="x">sleep 10m</span>
+</pre></div>
+
+
+<p>Save and exit. You can test it out by clicking "Build now" and viewing the results. If there are any problems, click on "Console Output" to read any complaints Jenkins dared to utter while trying to execute your command. Don't you like a butler who talks back?</p>
+<p>That about wraps up this very basic tutorial for getting Jenkins up and running on your Macbook. If you want to stop the daemon, run <code>sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist</code> (enter the password you use to log into your laptop when prompted). </p>
+<p>One weird quirk about Jenkins is that it shows a blue ball whan a job build is completed successfully, and a red ball when it fails. Maybe he's being sensitive to users with red-green colorblindness? If you like Christmas colors or have been conditioned by years of driving in traffic, the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Green+Balls">Green Balls Jenkins plugin</a> can help with that.</p>
+<p>Have fun getting acquainted with Jenkins!</p>
+<p>Further reading:<br />
+<a href="http://www.cimgf.com/2015/05/26/setting-up-jenkins-ci-on-a-mac-2/">Setting up Jenkins CI on a Mac</a><br />
+<a href="http://goodliffe.blogspot.com/2011/09/how-to-set-up-jenkins-ci-on-mac.html">How to set up Jenkins CI on Mac</a><br />
+<a href="https://gist.github.com/ostinelli/972cfdb4bce51d428d3b">Set up Jenkins CI on OSX</a></p>
+    </article>
+
+    <hr>
+
             </div>
         </div>
     </div>
