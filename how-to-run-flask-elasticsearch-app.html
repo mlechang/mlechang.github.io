@@ -113,7 +113,23 @@
 <p>Let's explore how it works!</p>
 <h2>How to set up a Flask app that allows you to search an Elasticsearch index</h2>
 <h3>Set up Elasticsearch</h3>
-<p><a href="https://www.elastic.co/products/elasticsearch">Download Elasticsearch</a> and start it up on your machine. Make sure it's running (<code>curl localhost:9200</code> should return some JSON that ends with "you know, for search"). Keep it running while you proceed with the steps below. (When you're done with this tutorial you can exit it with a <code>ctrl + C</code>.</p>
+<p><a href="https://www.elastic.co/products/elasticsearch">Download Elasticsearch</a> and start it up on your machine. Make sure it's running (<code>curl localhost:9200</code> should return some JSON that ends with "you know, for search"):</p>
+<div class="highlight"><pre><span></span>{
+  &quot;name&quot; : &quot;my_node&quot;,
+  &quot;cluster_name&quot; : &quot;my_cluster&quot;,
+  &quot;version&quot; : {
+    &quot;number&quot; : &quot;2.3.3&quot;,
+    &quot;build_hash&quot; : &quot;bla bla bla&quot;,
+    &quot;build_timestamp&quot; : &quot;2016-05-17T15:40:04Z&quot;,
+    &quot;build_snapshot&quot; : false,
+    &quot;lucene_version&quot; : &quot;5.5.0&quot;
+  },
+  &quot;tagline&quot; : &quot;You Know, for Search&quot;
+}
+</pre></div>
+
+
+<p>Keep it running while you proceed with the steps below. (When you're done with this tutorial you can exit it with a <code>ctrl + C</code>.</p>
 <h3>Prepare your data</h3>
 <p>Now that we have Elasticsearch up and running locally, it's time to prepare some data that we can store in an ES index. See <a href="https://mlechang.github.io/python-elasticsearch-intro.html">this post</a> for some basic pyelasticsearch commands, or consult more details in <a href="#final-notes">final notes</a>. My data was stored in JSON file in this format:</p>
 <div class="highlight"><pre><span></span>[
