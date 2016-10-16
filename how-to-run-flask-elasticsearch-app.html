@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+            <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>mle chang</title>
+
+
+        <!-- Bootstrap Core CSS -->
+        <link href="/theme/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/theme/css/clean-blog.min.css" rel="stylesheet">
+
+        <!-- Code highlight color scheme -->
+            <link href="/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+
+
+        <meta name="tags" contents="python" />
+        <meta name="tags" contents="elasticsearch" />
+        <meta name="tags" contents="flask" />
+        <meta name="tags" contents="bootstrap" />
+        <meta name="tags" contents="json" />
+
+
+			<meta property="og:locale" content="en">
+		<meta property="og:site_name" content="mle chang">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="/how-to-run-flask-elasticsearch-app.html">
+	<meta property="og:title" content="How to set up a Flask app with pyelasticsearch">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="/">
+	<meta property="article:published_time" content="2016-10-16 00:00:00-04:00">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">mle chang</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+        <header class="intro-header" style="background-image: url('/theme/images/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>How to set up a Flask app with pyelasticsearch</h1>
+                        <span class="meta">Posted by
+                                <a href="/author/mlechang.html">mlechang</a>
+                             on Sun 16 October 2016
+                        </span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- Post Content -->
+    <article>
+        <p>I firmly believe in the idea of baby steps when learning new technologies. If you're anything like me, if you try to tackle everything at once, the result won't be pretty. You'll end up anxiously eating Cheetos in hopes that the orange powder will coat your fingers and give you a semi-legitimate excuse not to have to type for a while. </p>
+<p>So while I was conducting research for a <a href="https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/">series of articles about monitoring Elasticsearch</a>, I began to wonder how I could learn more on my own, first by dipping my toes in <a href="https://pyelasticsearch.readthedocs.io/en/latest/">pyelasticsearch</a> (more about that <a href="https://mlechang.github.io/python-elasticsearch-intro.html">here</a>).</p>
+<p>For my next adventure, I set out to create a Flask app that would allow me to query a locally hosted Elasticsearch index. You may wonder...why bother? After all, it doesn't have a lot of the functionality that Elasticsearch's Sense app does. </p>
+<p>I don't really have a good answer to that question. Basically, I made it because I love Python and I wanted to play around with Flask. I'm sharing it with the world because I didn't see many Python/Flask + Elasticsearch projects out there, and I thought it might help or inspire a kindred spirit who wants to experiment with these two technologies. And that's as good a reason as any to create something, right? </p>
+<p>Let's explore how it works!</p>
+<h2>The full scoop on Elasticsnoop</h2>
+<p><a href="https://bitbucket.org/echang26/elasticsnoop">Elasticsnoop</a> is my attempt to provide a starting point for playing around with Elasticsearch in Python. </p>
+<p><a href="https://pyelasticsearch.readthedocs.io/en/latest/">pyelasticsearch</a> is my preferred Python client for interacting with Elasticsearch's API. Elasticsnoop is a simple Flask app that uses the pyelasticsearch client to allow you to search a locally hosted Elasticsearch index. </p>
+<h2>How to set up a Flask app that allows you to search an Elasticsearch index</h2>
+<h3>Set up Elasticsearch</h3>
+<p><a href="https://www.elastic.co/products/elasticsearch">Download Elasticsearch</a> and start it up on your machine. Make sure it's running (<code>curl localhost:9200</code> should return some JSON that ends with "you know, for search"). Keep it running while you proceed with the steps below. (When you're done with this tutorial you can exit it with a <code>ctrl + C</code>.</p>
+<h3>Prepare your data</h3>
+<p>Now that we have Elasticsearch up and running locally, it's time to prepare some data that we can store in an ES index. See <a href="https://mlechang.github.io/python-elasticsearch-intro.html">this post</a> for some basic pyelasticsearch commands, or consult more details in <a href="#final-notes">final notes</a>. My data was stored in JSON file in this format:</p>
+<div class="highlight"><pre><span></span>[
+  {
+    &quot;Content&quot;: &quot;words, words, words...&quot;,
+    &quot;Tags&quot;: [
+      &quot;integration&quot;,
+      &quot;apache&quot;,
+      &quot;java&quot;,
+      &quot;jmx&quot;,
+      &quot;tomcat&quot;,
+      &quot;web server&quot;
+    ],
+    &quot;Author&quot;: &quot;Abril Loya Enriquez&quot;,
+    &quot;Title&quot;: &quot;Monitor Tomcat metrics with Datadog&quot;
+  },
+  {
+    &quot;Content&quot;: &quot;more words, more words, more words&quot;,
+    &quot;Tags&quot;: [
+      &quot;integration&quot;,
+      &quot;monitoring&quot;,
+      &quot;performance&quot;,
+      &quot;python&quot;,
+      &quot;wsgi server&quot;
+    ],
+    &quot;Author&quot;: &quot;Emily Chang&quot;,
+    &quot;Title&quot;: &quot;Monitor Gunicorn performance with Datadog&quot;
+  },
+  {
+      more docs...
+  }
+]
+</pre></div>
+
+
+<h3>Upload the data into your index</h3>
+<p>It's time to index your JSON documents. Here's how I indexed my file, which is called <code>my_data.json</code> (stored in the same directory from which we're running this script), using pyelasticsearch:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pyelasticsearch</span> <span class="kn">import</span> <span class="n">ElasticSearch</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="c1"># use default localhost:9200 to connect to Elasticsearch client</span>
+    <span class="c1"># replace with your own IP/port in ElasticSearch() as needed</span>
+    <span class="n">es</span> <span class="o">=</span> <span class="n">ElasticSearch</span><span class="p">()</span>
+    <span class="n">output_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_data.json&#39;</span><span class="p">))</span>
+    <span class="c1"># create mapping for our index</span>
+    <span class="n">my_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;my_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;Content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;Tags&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;Author&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>    
+    <span class="c1"># create the index, my_index, using the mapping we created</span>
+    <span class="n">es</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="s1">&#39;test_tweets&#39;</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mappings&#39;</span><span class="p">:</span> <span class="n">my_mapping</span><span class="p">})</span>
+    <span class="n">es</span><span class="o">.</span><span class="n">bulk</span><span class="p">((</span><span class="n">es</span><span class="o">.</span><span class="n">index_op</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">output_json</span><span class="p">),</span> <span class="n">doc_type</span><span class="o">=</span><span class="s1">&#39;my_type&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;my_index&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+
+
+<p>Note that althought we created a mapping for our document type, <code>my_type</code>, this is not a requirement when using Elasticsearch. If you don't specify a mapping before creating your index, once you start uploading data, Elasticsearch will automatically detect the <code>type</code> of each field (date, string, integer, etc.).</p>
+<p>However, if you want to ensure that Elasticsearch stores your data the way you intend it to be stored, you should probably create a mapping for your index. For example, I chose to make the "Author" field <code>not_analyzed</code> because the authors aren't going to appear differently (for example, the blog isn't going to list the author as <code>Emily Chang</code> in one post and just <code>emily</code> on another post. It's an automatically generated field that shouldn't vary from post to post. We also may want to be able to aggregate on it later, which means we can take advantage of doc values, which do not work on analyzed string fields. </p>
+<h3>Get Elasticsnoopin'</h3>
+<p>Clone the <a href="https://bitbucket.org/echang26/elasticsnoop">Elasticsnoop repo</a>.  </p>
+<p>Create a virtual environment and install the requirements: <code>pip install -r requirements.txt</code>.</p>
+<p>Now you need to make a few changes to a few files in your local ElasticSnoop repo. Open up <code>elasticsnoop.py</code> and replace <code>index_name</code> (in the <code>get_search_query()</code> function) with the name of the index you created.
+- In <code>templates/search_results.html</code>, tweak this section:</p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">doc</span> <span class="k">in</span> <span class="nv">results</span><span class="o">[</span><span class="s1">&#39;hits&#39;</span><span class="o">][</span><span class="s1">&#39;hits&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">doc</span><span class="o">[</span><span class="s1">&#39;_source&#39;</span><span class="o">][</span><span class="s1">&#39;Title&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>...by replacing <code>doc['_source']['Title']</code> with the name of the field you want to see in the results (e.g. `doc['_source']['category'] if the desired field is 'category').</p>
+<p>Save your changes and fire up Flask (run <code>python elasticsnoop.py</code> from your elasticsnoop directory and navigate to <code>127.0.0.1:5000</code> in your favorite web browser).</p>
+<p>You should now be able to start searching your Elasticsearch index by typing stuff into the search bar on the Elasticsnoop homepage.</p>
+<h2>What does it look like?</h2>
+<p>Here's the homepage:
+<img alt="elasticsearch flask homepage 1" src="../images/elasticsnoop1.png" /></p>
+<p>And the search results page:
+<img alt="elasticsearch flask search results page" src="../images/elasticsnoop2.png" /></p>
+<div id="final-notes"></div>
+
+<h2>Some closing questions you might have</h2>
+<p><strong>What data should I use for my index?</strong><br />
+Anything you want! I used Selenium to scrape some blog posts and then stored them as JSON. You can also download existing datasets from somewhere like <a href="https://tinyletter.com/data-is-plural">Data is Plural</a> and just use those if you want to get started right away. Elasticsearch's Kibana tutorial also includes a <a href="https://www.elastic.co/guide/en/kibana/3.0/import-some-data.html">Shakespeare JSON file</a> you can download.</p>
+<p><strong>I got my Flask app working. What now?</strong><br />
+This very simple version assumes you only want to search one ES index, and see how many results/hits you get. In reality, you probably want to do much more! Feel free to revise <code>elasticsnoop.py</code> by modifying <code>get_search_query()</code> to support more complex queries. Consult the <a href="https://pyelasticsearch.readthedocs.io/en/latest/">pyelasticsearch docs</a> for more info on that. You can also create multiple Elasitcsearch indices, or and update the Flask code to enable the user to specify which index to search. </p>
+<p>I hope that others will be able to use Elasticsnoop as a starting point for much, much bigger things. If you want to share what you ended up doing with it, please do <a href="mailto:echang26@gmail.com">get in touch</a>!</p>
+    </article>
+
+    <hr>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mlechang.github.io">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Blog powered by <a href="http://getpelican.com">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/theme/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/theme/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/theme/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
