@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+            <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>mle chang</title>
+
+
+        <!-- Bootstrap Core CSS -->
+        <link href="/theme/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/theme/css/clean-blog.min.css" rel="stylesheet">
+
+        <!-- Code highlight color scheme -->
+            <link href="/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+
+
+        <meta name="tags" contents="Linode" />
+        <meta name="tags" contents="Apache" />
+        <meta name="tags" contents="Ubuntu" />
+        <meta name="tags" contents="Linux" />
+
+
+			<meta property="og:locale" content="en">
+		<meta property="og:site_name" content="mle chang">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="/linode-made-easy.html">
+	<meta property="og:title" content="Linode the Easy Way">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="/">
+	<meta property="article:published_time" content="2017-01-10 00:00:00-05:00">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">mle chang</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+        <header class="intro-header" style="background-image: url('/theme/images/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Linode the Easy Way</h1>
+                        <span class="meta">Posted by
+                                <a href="/author/mlechang.html">mlechang</a>
+                             on Tue 10 January 2017
+                        </span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- Post Content -->
+    <article>
+        <p>Setting up a Linode server consists of four main steps:</p>
+<ol>
+<li>Create an image</li>
+<li>Boot up the server</li>
+<li>Create a non-root user</li>
+<li>Sett up ssh access from your local machine (with a shortcut) </li>
+</ol>
+<p>Most of this info can be found in Linode's excellent <a href="https://www.linode.com/docs/getting-started#logging-in-to-the-linode-manager">Getting Started guide</a>, but hey, what can I say? I like to write stuff down. This is a reference for myself and for anyone who wants to walk through the process with a normal person, rather than an official Linode guide.</p>
+<h2>Prerequisites</h2>
+<p>Before we get started, make sure you:<br />
+- Sign up for <a href="https://www.linode.com/">Linode</a> if you haven't already. You can get a $20 credit with promo code <strong>PodcastInIt2017</strong>. <br />
+- Sign in to Linode.  </p>
+<h2>First steps</h2>
+<p>Select the plan you want. I went with the cheapest $10/mo plan.</p>
+<p>In the Linode Manager dashboard, click on <strong>Deploy an Image</strong>.</p>
+<p>We are going to create an image now. You can think of it almost like you're creating the first cookie cutter that determines what "shape" of a server you want (in this case, the "shape" consists of the Linux distro, disk size, and swap disk size). Although we're only making one cookie today, you should probably choose a type of cookie that you're likely to want later on.</p>
+<p>Choose your Linux distribution. I went with trusty old Ubuntu 14.04 and chose to set my Deployment Disk Size to half the max value. Linode says you can always revise this value later on so no worries if you change your mind later on.</p>
+<p>Now it's time to create a root password for your Linode. Make sure it's at least 6 characters long. It should also include a mix of lowercase and uppercase letters, and/or puncutation &amp; numbers.</p>
+<p>Make a note of this root password; you'll need it again soon.</p>
+<p>Click Deploy!</p>
+<p>Once Linode is done creating the disk and filesystem, click on the Boot button (below your image) in the Dashboard section. Once that's up and running, the Server Status section on the right column of your Linode Manager will say Running.</p>
+<p>Congrats...your Linode server is now running! Reward yourself with a cookie. I'll still be here when you get back.</p>
+<h2>SSH into your brand-new server</h2>
+<p>Click on the Remote Access tab at the top of your Linode Manager page.
+Copy the SSH Access command listed in the first line.</p>
+<p>Open up your command line and paste in the ssh command you just copied:<br />
+<code>ssh root@&lt;IP_ADDRESS&gt;</code></p>
+<p>You'll get a message like:  </p>
+<div class="highlight"><pre><span></span>The authenticity of host &#39;&lt;IP_ADDRESS&gt;&#39; can&#39;t be established.
+RSA key fingerprint is blablabla.
+Are you sure you want to continue connecting (yes/no)? 
+</pre></div>
+
+
+<p>Type "yes" and hit Enter.</p>
+<p>When prompted, enter the root password you just created (right before you had that cookie).</p>
+<p>Your Terminal prompt should now start with <code>root@ubuntu:~#</code></p>
+<p>You've successfully accessed your new Linode server!</p>
+<h2>Configuration &amp; security stuff</h2>
+<h3>Update the software</h3>
+<p>For Ubuntu, do:
+<code>apt-get update &amp;&amp; apt-get upgrade</code></p>
+<h3>Set your Linode server's hostname</h3>
+<ol>
+<li><code>echo "&lt;HOST_NAME&gt;" &gt; /etc/hostname</code> (replacing <code>&lt;HOST_NAME&gt;</code> with your desired hostname in quotes, e.g. "silverback")</li>
+<li><code>hostname -F /etc/hostname</code></li>
+</ol>
+<h3>Set the timezone</h3>
+<p><code>dpkg-reconfigure tzdata</code><br />
+Select your region when prompted.<br />
+Check that it updated correctly:<br />
+<code>root@ubuntu:~# date</code><br />
+<code>Tue Jan  3 20:48:25 EST 2017</code></p>
+<h3>Create a non-root user</h3>
+<ol>
+<li>Add a user, <USER_NAME>: <code>adduser &lt;USER_NAME&gt;</code></li>
+<li>It will prompt you to create a UNIX password for <USER_NAME>. Make sure to make a note of this somewhere so you don't forget!</li>
+<li>Add <USER_NAME> to the <code>sudo</code> group: <code>adduser &lt;USER_NAME&gt; sudo</code></li>
+<li>Disconnect from your server: <code>exit</code></li>
+<li>Try logging in with your new user name: <code>ssh &lt;USER_NAME&gt;@my.ip.address</code></li>
+</ol>
+<h3>Using ssh keys rather than passwords</h3>
+<ol>
+<li>While logged in to your Linode server with the non-root user you created, create an ssh directory and give it permissions: <code>mkdir -p ~/.ssh &amp;&amp; sudo chmod -R 700 ~/.ssh/</code></li>
+<li>Create an authorized_keys file: <code>touch authorized_keys</code></li>
+<li>Give the file permissions: <code>chmod 600 ~/.ssh/authorized_keys</code></li>
+<li>Go back to your local computer's Terminal. </li>
+<li>Check for the existence of a public SSH key: <code>ls -al ~/.ssh</code></li>
+<li>If you see <code>id_rsa.pub</code> and <code>id_rsa</code> listed there, you're good to go. Otherwise, you'll need to generate one: <code>ssh-keygen -b 4096</code></li>
+<li>Now copy and paste that public key into your Linode server's authorized_keys file: <code>cat ~/.ssh/id_rsa.pub | ssh &lt;USER_NAME&gt;@my.ip.address 'cat &gt;&gt; .ssh/authorized_keys'</code></li>
+<li>Go back to your Linode server console and check for the key in your authorized_keys file: <code>cat ~/.ssh/authorized_keys</code></li>
+<li>Try disconnecting from Linode and then ssh'ing back in. You shouldn't need to enter a password anymore because it's now using the public-private key pair you just set up!</li>
+</ol>
+<h3>Create a shortcut to ssh into</h3>
+<p>You must be tired of copying and pasting your Linode's IP address by now. Let's create a shortcut on your local machine so you can ssh into your Linode more easily.</p>
+<p>On your local machine, create a <code>config</code> file within your <code>~/.ssh</code> directory if it doesn't exist already.</p>
+<p>In the config file, put something like the below:</p>
+<div class="highlight"><pre><span></span>Host &lt;DESIRED_HOST_NAME&gt;
+    HostName &lt;LINODE_IP&gt;
+    User &lt;USER_NAME&gt;
+</pre></div>
+
+
+<p>Here's an example:</p>
+<div class="highlight"><pre><span></span>Host myawesomelinodeserver
+    HostName 123.45.67.89
+    User imthenonrootuser
+</pre></div>
+
+
+<p>Now try it out:
+<code>ssh myawesomelinodeserver</code></p>
+<p>You should automatically be able to connect to your Linode server, no password or IP address required! How cool is that?</p>
+<h3>More secure SSH options</h3>
+<p>While connected to your Linode server, open your <code>/etc/ssh/sshd_config</code> file:<br />
+<code>sudo nano /etc/ssh/sshd_config</code></p>
+<p>In the file, change <code>PermitRootLogin</code> and <code>PasswordAuthentication</code> to <code>no</code>.</p>
+<p>Disable the protocol you're not using, either IPv4 of IPv6. Check which one your Internet Service Provider is using by opening a web browser on your local machine and navigating <a href="http://ipv6-test.com/">here</a>. </p>
+<p>My ISP only supports IPv4 so I'm going with <code>AddressFamily inet</code>. If you support IPv6 and only want to listen over IPv6, replace that part with <code>AddressFamily inet6</code>.</p>
+<p><code>echo 'AddressFamily inet' | sudo tee -a /etc/ssh/sshd_config</code> </p>
+<p>This should add <code>AddressFamily inet</code> as the last line in your <code>sshd_config</code> file.</p>
+<p>To make these changes take effect, restart the ssh service on your Linode server. For mine (Ubuntu 14.04) I had to issue the following command: <code>sudo service ssh restart</code></p>
+<h3>Install Fail2Ban</h3>
+<p>Switch to root user: <code>sudo su</code>
+Update your system: <code>apt-get update &amp;&amp; apt-get upgrade -y</code>
+Install Fail2Ban: <code>apt-get install fail2ban</code>
+Go to the config file: <code>cd /etc/fail2ban</code></p>
+<h2>Connect a domain name</h2>
+<p>Time to connect your domain to your Linode server. I bought a Namecheap domain, so that's what I'm going to . In Namecheap, go to your domain &gt; Manage. In the Nameservers section, add in these five:</p>
+<div class="highlight"><pre><span></span>ns1.linode.com  
+ns2.linode.com  
+ns3.linode.com  
+ns4.linode.com  
+ns5.linode.com  
+</pre></div>
+
+
+<p>In Linode, go to DNS manager and then add a Domain Zone. Add your email under SOA email. Within a few hours, you should be able to see that your Namecheap domain maps to your Linode IP.</p>
+<p>This seems like a good stopping point for now. More to come soon!</p>
+<p><strong>Resources</strong>:<br />
+Linode's official <a href="https://www.linode.com/docs/getting-started#logging-in-to-the-linode-manager">Getting Started</a> guide.<br />
+Linode's guide to <a href="https://www.linode.com/docs/security/securing-your-server">securing your server</a>.<br />
+A <a href="https://scotch.io/tutorials/how-to-setup-ssh-public-key-authentication">useful guide</a> to SSH keys and host names.<br />
+<a href="https://medium.com/linode-cube/using-the-linode-dns-manager-183fe923d5d#.680pqvlwr">Linode DNS manager guide</a></p>
+    </article>
+
+    <hr>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mlechang.github.io">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Blog powered by <a href="http://getpelican.com">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/theme/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/theme/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/theme/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
