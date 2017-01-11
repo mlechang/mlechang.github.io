@@ -207,9 +207,9 @@ Check that it updated correctly:<br />
 <p>This should add <code>AddressFamily inet</code> as the last line in your <code>sshd_config</code> file.</p>
 <p>To make these changes take effect, restart the ssh service on your Linode server. For mine (Ubuntu 14.04) I had to issue the following command: <code>sudo service ssh restart</code></p>
 <h3>Install Fail2Ban</h3>
-<p>Switch to root user: <code>sudo su</code>
-Update your system: <code>apt-get update &amp;&amp; apt-get upgrade -y</code>
-Install Fail2Ban: <code>apt-get install fail2ban</code>
+<p>Switch to root user: <code>sudo su</code><br />
+Update your system: <code>apt-get update &amp;&amp; apt-get upgrade -y</code><br />
+Install Fail2Ban: <code>apt-get install fail2ban</code><br />
 Go to the config file: <code>cd /etc/fail2ban</code></p>
 <h2>Connect a domain name</h2>
 <p>Time to connect your domain to your Linode server. I bought a Namecheap domain, so that's what I'm going to . In Namecheap, go to your domain &gt; Manage. In the Nameservers section, add in these five:</p>
