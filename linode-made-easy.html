@@ -160,7 +160,7 @@ Check that it updated correctly:<br />
 <h3>Create a non-root user</h3>
 <ol>
 <li>Add a user, <USER_NAME>: <code>adduser &lt;USER_NAME&gt;</code></li>
-<li>It will prompt you to create a UNIX password for <USER_NAME>. Make sure to make a note of this somewhere so you don't forget!</li>
+<li>It will prompt you to create a UNIX password for <code>&lt;USER_NAME&gt;</code>. Make sure to make a note of this somewhere so you don't forget!</li>
 <li>Add <USER_NAME> to the <code>sudo</code> group: <code>adduser &lt;USER_NAME&gt; sudo</code></li>
 <li>Disconnect from your server: <code>exit</code></li>
 <li>Try logging in with your new user name: <code>ssh &lt;USER_NAME&gt;@my.ip.address</code></li>
@@ -177,6 +177,7 @@ Check that it updated correctly:<br />
 <li>Go back to your Linode server console and check for the key in your authorized_keys file: <code>cat ~/.ssh/authorized_keys</code></li>
 <li>Try disconnecting from Linode and then ssh'ing back in. You shouldn't need to enter a password anymore because it's now using the public-private key pair you just set up!</li>
 </ol>
+<p>Note: If step 7 doesn't work, go into Linode's Lish console (log into Linode, navigate to Remote Access, and at the bottom, click on "Launch Lish Console." Go in your local computer's Terminal and enter the command <code>cat ~/.ssh/id_rsa.pub</code>. Copy the output (should end with your email user) and go back to your Lish console. In the Lish console, log into the user you want to be able to ssh into. Then open your <code>authorized_keys</code> file: <code>nano ~/.ssh/authorized_keys</code> and paste your public key at the end of the file, save, and exit. You should now be able to ssh into your Linode from that computer using this ssh key.</p>
 <h3>Create a shortcut to ssh into</h3>
 <p>You must be tired of copying and pasting your Linode's IP address by now. Let's create a shortcut on your local machine so you can ssh into your Linode more easily.</p>
 <p>On your local machine, create a <code>config</code> file within your <code>~/.ssh</code> directory if it doesn't exist already.</p>
